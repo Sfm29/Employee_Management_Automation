@@ -1,101 +1,159 @@
 # Employee Management Automation
 
-A professional end-to-end automation framework built with Playwright and TypeScript for UI and API testing.
+[![CI](https://github.com/Sfm29/Employee_Management_Automation/actions/workflows/playwright.yml/badge.svg)](https://github.com/Sfm29/Employee_Management_Automation/actions/workflows/playwright.yml)
+![Playwright](https://img.shields.io/badge/Playwright-Latest-2EAD33?logo=playwright&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.x-3178C6?logo=typescript&logoColor=white)
+![Node.js](https://img.shields.io/badge/Node.js-22.x-339933?logo=node.js&logoColor=white)
+![License](https://img.shields.io/badge/License-MIT-blue)
 
-The project demonstrates modern test automation practices, including Page Object Model, Service Layer, reusable fixtures, dynamic test data generation, reporting, and continuous integration using GitHub Actions.
+A scalable UI and API automation framework built with **Playwright** and **TypeScript**.
 
----
-
-## Features
-
-- UI automation using Playwright
-- API automation using Playwright APIRequestContext
-- Page Object Model (POM)
-- Service Layer abstraction
-- Factory Pattern for dynamic test data
-- Reusable Fixtures
-- Centralized Wait Utilities
-- Logging support
-- Allure Reporting
-- HTML Reporting
-- GitHub Actions CI
-- Environment-based configuration
-- Smoke and Regression test execution
+The project demonstrates modern automation architecture by combining UI and API testing with reusable components, Page Object Model, Service Layer, centralized utilities and Continuous Integration using GitHub Actions.
 
 ---
 
-## Technology Stack
+# Table of Contents
 
-| Technology | Purpose |
-|------------|---------|
-| TypeScript | Programming language |
-| Playwright | UI and API automation |
-| Faker | Test data generation |
-| Allure | Test reporting |
-| GitHub Actions | Continuous Integration |
-| Node.js | Runtime environment |
+- [Overview](#overview)
+- [Framework Overview](#framework-overview)
+- [Technology Stack](#technology-stack)
+- [Architecture](#architecture)
+- [Project Structure](#project-structure)
+- [Implemented Features](#implemented-features)
+- [Getting Started](#getting-started)
+- [Environment Variables](#environment-variables)
+- [Running Tests](#running-tests)
+- [Reports](#reports)
+- [Continuous Integration](#continuous-integration)
+- [License](#license)
+
+---
+
+# Overview
+
+This project was created to demonstrate how a maintainable automation framework can be built using Playwright and TypeScript.
+
+Instead of concentrating business logic inside test files, the framework separates responsibilities into dedicated layers, making the code easier to understand, maintain and extend.
+
+The project includes both UI and API automation and follows software engineering practices commonly used in enterprise automation projects.
 
 ---
 
-## Project Structure
-
-```
-.
-├── .github
-│   └── workflows
-│       └── playwright.yml
-│
-├── src
-│   ├── api
-│   ├── components
-│   ├── constants
-│   ├── factories
-│   ├── fixtures
-│   ├── models
-│   ├── pages
-│   ├── services
-│   └── utils
-│
-├── tests
-│   ├── api
-│   └── ui
-│
-├── playwright.config.ts
-├── package.json
-└── tsconfig.json
-```
-
----
+# Framework Overview
 
 ## Architecture
 
-The framework follows a layered architecture designed to improve readability, maintainability and scalability.
+![Framework Architecture](docs/images/architecture.png)
 
-### Page Objects
+## Playwright HTML Report
 
-UI interactions are encapsulated inside dedicated Page Objects, keeping tests focused on business scenarios rather than implementation details.
+![Playwright Report](docs/images/playwright-report.png)
 
-### Services
+## Allure Report
 
-Business operations are grouped into reusable services to reduce duplication and simplify test implementation.
+![Allure Report](docs/images/allure-report.png)
 
-### Fixtures
+## GitHub Actions
 
-Custom Playwright fixtures centralize common setup logic and dependency injection.
-
-### Factory Pattern
-
-Test data is generated dynamically using Faker, avoiding hardcoded values and improving test independence.
-
-### Utilities
-
-Shared utilities provide centralized waiting strategies, logging and helper methods used across the framework.
+![GitHub Actions](docs/images/github-actions.png)
 
 ---
 
-## Test Coverage
+# Technology Stack
 
-### UI Tests
+| Technology | Purpose |
+|------------|---------|
+| TypeScript | Programming Language |
+| Playwright | UI & API Automation |
+| Faker | Dynamic Test Data |
+| Allure | Test Reporting |
+| GitHub Actions | Continuous Integration |
+| Node.js | Runtime Environment |
+
+---
+
+# Architecture
+
+The framework follows a layered architecture where each layer has a single responsibility.
+
+```
+Tests
+   │
+   ▼
+Services
+   │
+   ▼
+Page Objects
+   │
+   ├────────── Components
+   ├────────── API Layer
+   ├────────── Factories
+   └────────── Utilities
+```
+
+### Tests
+
+Business scenarios only.
+
+### Services
+
+Coordinate complete business workflows while keeping tests concise and readable.
+
+### Page Objects
+
+Encapsulate page interactions and isolate UI changes from the test layer.
+
+### API Layer
+
+Centralizes API requests and response validation.
+
+### Factories
+
+Generate dynamic test data using Faker.
+
+### Utilities
+
+Provide reusable helpers such as waits, logging and shared methods.
+
+---
+
+# Project Structure
+
+```text
+.
+├── .github/
+│   └── workflows/
+│       └── playwright.yml
+│
+├── docs/
+│   └── images/
+│
+├── src/
+│   ├── api/
+│   ├── components/
+│   ├── constants/
+│   ├── factories/
+│   ├── fixtures/
+│   ├── models/
+│   ├── pages/
+│   ├── services/
+│   └── utils/
+│
+├── tests/
+│   ├── api/
+│   └── ui/
+│
+├── LICENSE
+├── README.md
+├── package.json
+└── playwright.config.ts
+```
+
+---
+
+# Implemented Features
+
+## UI Automation
 
 - Login
 - Create Employee
@@ -103,30 +161,42 @@ Shared utilities provide centralized waiting strategies, logging and helper meth
 - Update Employee
 - Delete Employee
 
-### API Tests
+## API Automation
 
-- GET User
-- POST User
-- PUT User
-- DELETE User
+- GET
+- POST
+- PUT
+- DELETE
+
+## Framework Features
+
+- Page Object Model
+- Service Layer
+- Factory Pattern
+- Custom Fixtures
+- Wait Utilities
+- Logging
+- HTML Reporting
+- Allure Reporting
+- GitHub Actions
 
 ---
 
-## Installation
+# Getting Started
 
-Clone the repository
+## Clone the repository
 
 ```bash
 git clone https://github.com/Sfm29/Employee_Management_Automation.git
 ```
 
-Install dependencies
+## Install dependencies
 
 ```bash
 npm install
 ```
 
-Install Playwright browsers
+## Install Playwright browsers
 
 ```bash
 npx playwright install
@@ -134,21 +204,19 @@ npx playwright install
 
 ---
 
-## Environment Variables
+# Environment Variables
 
 Create a `.env` file in the project root.
 
 ```env
 BASE_URL=https://opensource-demo.orangehrmlive.com
-
 ORANGE_USERNAME=Admin
-
 ORANGE_PASSWORD=admin123
 ```
 
 ---
 
-## Running Tests
+# Running Tests
 
 Run all tests
 
@@ -168,13 +236,13 @@ Run API tests
 npm run test:api
 ```
 
-Run Smoke tests
+Run smoke tests
 
 ```bash
 npm run test:smoke
 ```
 
-Run Regression tests
+Run regression tests
 
 ```bash
 npm run test:regression
@@ -182,27 +250,27 @@ npm run test:regression
 
 ---
 
-## Reports
+# Reports
 
-Generate Allure report
+Generate the Allure report
 
 ```bash
 npm run allure:generate
 ```
 
-Open Allure report
+Open the Allure report
 
 ```bash
 npm run allure:open
 ```
 
-Generate and open report
+Generate and open automatically
 
 ```bash
 npm run allure
 ```
 
-Playwright HTML Report
+Generate the Playwright HTML report
 
 ```bash
 npm run report
@@ -210,48 +278,31 @@ npm run report
 
 ---
 
-## Continuous Integration
+# Continuous Integration
 
-The project uses GitHub Actions to automatically execute the test suite whenever changes are pushed to the repository.
+The project uses GitHub Actions to automatically validate every push to the repository.
 
-The workflow performs the following tasks:
+The pipeline performs the following steps:
 
-- Installs project dependencies
-- Installs Playwright browsers
-- Executes UI and API tests
-- Generates Allure reports
-- Publishes test artifacts
-
----
-
-## Design Principles
-
-- Separation of concerns
-- Reusable components
-- Low coupling
-- High maintainability
-- Readable test scenarios
-- Scalable architecture
+- Install project dependencies
+- Install Playwright browsers
+- Execute UI tests
+- Execute API tests
+- Generate Allure reports
+- Upload build artifacts
 
 ---
 
-## Future Improvements
+# License
 
-Possible future enhancements include:
+This project is licensed under the MIT License.
 
-- Cross-browser execution matrix
-- Parallel execution optimization
-- Docker support
-- Performance testing
-- Visual regression testing
-- API contract validation
+See the [LICENSE](LICENSE) file for details.
 
 ---
 
-## Author
+# Author
 
-Steve Ferreira
+**Steve Fernandes**
 
-GitHub
-
-https://github.com/Sfm29
+GitHub: https://github.com/Sfm29
