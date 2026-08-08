@@ -6,8 +6,10 @@ export abstract class BasePage {
     constructor(protected readonly page: Page) {}
 
     async navigate(url: string): Promise<void> {
-        await this.page.goto(url);
-    }
+    await this.page.goto(url, {
+        waitUntil: 'domcontentloaded',
+    });
+}
 
     async click(locator: Locator): Promise<void> {
         await WaitUtils.forVisible(locator);
