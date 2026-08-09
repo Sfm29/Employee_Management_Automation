@@ -1,4 +1,6 @@
 # Employee Management Automation
+
+A professional end-to-end automation framework built with Playwright and TypeScript for UI and API testing.
 [![CI](https://github.com/Sfm29/Employee_Management_Automation/actions/workflows/playwright.yml/badge.svg)](https://github.com/Sfm29/Employee_Management_Automation/actions/workflows/playwright.yml)
 ![Playwright](https://img.shields.io/badge/Playwright-Latest-2EAD33?logo=playwright&logoColor=white)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.x-3178C6?logo=typescript&logoColor=white)
@@ -6,28 +8,80 @@
 ![License](https://img.shields.io/badge/License-MIT-blue)
 
 
-A scalable UI and API automation framework built with **Playwright** and **TypeScript**, enhanced with an **AI-powered QA Agent**.
+The project demonstrates modern test automation practices, including Page Object Model, Service Layer, reusable fixtures, dynamic test data generation, reporting, and continuous integration using GitHub Actions.
+A scalable UI and API automation framework built with **Playwright** and **TypeScript**.
 
-The project demonstrates modern automation architecture by combining UI and API testing with reusable components, Page Object Model, Service Layer, centralized utilities, Continuous Integration using GitHub Actions and AI-driven test orchestration.
+The project demonstrates modern automation architecture by combining UI and API testing with reusable components, Page Object Model, Service Layer, centralized utilities and Continuous Integration using GitHub Actions.
 
 ---
+
+## Features
 
 # Table of Contents
 
 - [Overview](#overview)
+
 - [Framework Overview](#framework-overview)
+
 - [AI-Powered QA Agent](#ai-powered-qa-agent)
+
 - [Technology Stack](#technology-stack)
+
 - [Architecture](#architecture)
+
 - [Project Structure](#project-structure)
+
 - [Implemented Features](#implemented-features)
+
 - [Getting Started](#getting-started)
+
 - [Environment Variables](#environment-variables)
+
 - [Running Tests](#running-tests)
+
 - [Running the AI Agent](#running-the-ai-agent)
+
 - [Reports](#reports)
+
 - [Continuous Integration](#continuous-integration)
+
 - [License](#license)
+
+- UI automation using Playwright
+
+- API automation using Playwright APIRequestContext
+
+- Page Object Model (POM)
+
+- Service Layer abstraction
+
+- Factory Pattern for dynamic test data
+
+- Reusable Fixtures
+
+- Centralized Wait Utilities
+
+- Logging support
+
+- Allure Reporting
+
+- HTML Reporting
+
+- GitHub Actions CI
+
+- Environment-based configuration
+
+- Smoke and Regression test execution
+
+- AI-powered QA Agent
+
+- AI Agent tool orchestration
+
+- Employee search automation
+
+- Employee creation automation
+
+- Automated result verification
 
 ---
 
@@ -39,71 +93,62 @@ Instead of concentrating business logic inside test files, the framework separat
 
 The project includes both UI and API automation and follows software engineering practices commonly used in enterprise automation projects.
 
-The framework has also been extended with an AI-powered QA Agent that can use existing automation capabilities as tools to execute and verify application workflows.
-
 ---
 
 # Framework Overview
 
 ## Architecture
-
-
+![Framework Architecture](docs/images/architecture.png)
 
 ## Playwright HTML Report
-
-
+![Playwright Report](docs/images/playwright-report.png)
 
 ## Allure Report
-
-
+![Allure Report](docs/images/allure-report.png)
 
 ## GitHub Actions
-
+![GitHub Actions](docs/images/github-actions.png)
 
 
 ---
 
 # AI-Powered QA Agent
 
-The project includes an AI-powered QA Agent built on top of the existing Playwright and TypeScript automation framework.
+The project also includes an AI-powered QA Agent built on top of the existing Playwright and TypeScript automation framework.
 
-The Agent receives a high-level QA objective and can use automation capabilities exposed as tools to interact with the application and verify results.
+The AI Agent acts as an orchestration layer and uses controlled automation tools to interact with the application and verify results.
 
-The AI Agent does not replace the existing automation framework. Instead, it acts as an orchestration layer on top of the existing Services and Page Objects.
+The Agent reuses the existing Page Objects and Service Layer instead of creating a separate browser automation implementation.
 
 ## Current Agent Tools
 
-- `search_employee`
-- `create_employee`
+### Search Employee
 
-## Example
+The Agent can search for an employee using the employee ID and verify whether the employee exists.
 
-The Agent can receive an objective such as:
-
-> Create an employee and verify that the employee was created successfully.
-
-The Agent can then orchestrate the following workflow:
+Example:
 
 ```text
-AI QA Agent
-     │
-     ▼
-create_employee
-     │
-     ▼
-Employee created
-     │
-     ▼
-search_employee
-     │
-     ▼
-Employee verified
-     │
-     ▼
-PASS
+Tool: searching for employee 12345
 
-Example execution:
+Tool result:
+{
+  status: 'PASS',
+  employeeId: '12345',
+  message: 'Employee 12345 was found.'
+}
 
+Agent result:
+PASS — Employee 12345 was found.
+```
+
+### Create Employee
+
+The Agent can create an employee using the existing automation framework and then verify that the employee was successfully created.
+
+Example:
+
+```text
 Tool: creating employee John Agent (999998)
 
 Tool result:
@@ -113,7 +158,8 @@ Tool result:
     firstName: 'John',
     lastName: 'Agent',
     employeeId: '999998'
-  }
+  },
+  message: 'Employee John Agent with ID 999998 was created successfully.'
 }
 
 Tool: searching for employee 999998
@@ -126,27 +172,86 @@ Tool result:
 }
 
 Agent result:
-PASS — Employee John Agent (ID 999998) was created successfully
-and then verified as existing.
+PASS — Employee John Agent (ID 999998) was created successfully and then verified as existing.
+```
 
-The Agent can also identify when an employee cannot be found or when the underlying automation encounters an execution error.
+## Agent Architecture
 
-This demonstrates AI-driven tool orchestration combined with deterministic Playwright automation.
+```text
+AI QA Agent
+     │
+     ▼
+Agent Tools
+     │
+     ▼
+Employee Services
+     │
+     ▼
+Page Objects
+     │
+     ▼
+Playwright
+     │
+     ▼
+Application
+```
 
-Technology Stack
-Technology	Purpose
-TypeScript	Programming Language
-Playwright	UI & API Automation
-OpenAI Agents SDK	AI Agent & Tool Orchestration
-OpenAI API	AI Model Integration
-Faker	Dynamic Test Data
-Allure	Test Reporting
-GitHub Actions	Continuous Integration
-Node.js	Runtime Environment
-Architecture
+The current Agent supports employee search and employee creation workflows with result verification.
+
+---
+
+## Technology Stack
+
+# Technology Stack
+
+| Technology        | Purpose                       |
+| ----------------- | ----------------------------- |
+| TypeScript        | Programming language          |
+| Playwright        | UI and API automation         |
+| Faker             | Test data generation          |
+| Allure            | Test reporting                |
+| TypeScript        | Programming Language          |
+| Playwright        | UI & API Automation            |
+| Faker             | Dynamic Test Data             |
+| Allure             | Test Reporting                |
+| GitHub Actions    | Continuous Integration        |
+| Node.js           | Runtime environment           |
+| Node.js           | Runtime Environment           |
+| OpenAI Agents SDK | AI Agent & Tool Orchestration |
+| OpenAI API        | AI Model Integration          |
+
+---
+
+## Project Structure
+
+# Architecture
 
 The framework follows a layered architecture where each layer has a single responsibility.
 
+```
+.
+├── .github
+│   └── workflows
+│       └── playwright.yml
+│
+├── src
+│   ├── api
+│   ├── components
+│   ├── constants
+│   ├── factories
+│   ├── fixtures
+│   ├── models
+│   ├── pages
+│   ├── services
+│   └── utils
+│
+├── tests
+│   ├── api
+│   └── ui
+│
+├── playwright.config.ts
+├── package.json
+└── tsconfig.json
 Tests
    │
    ▼
@@ -159,69 +264,59 @@ Page Objects
    ├────────── API Layer
    ├────────── Factories
    └────────── Utilities
+```
 
-The AI Agent is integrated above the existing automation framework:
+---
 
-AI QA Agent
-     │
-     ▼
-Agent Tools
-     │
-     ▼
-Services
-     │
-     ▼
-Page Objects
-     │
-     ▼
-Playwright
-     │
-     ▼
-Application
-Tests
+### Tests
+
+## Architecture
 
 Business scenarios only.
 
-AI Agent
+### Services
 
-Interprets high-level QA objectives and uses the available automation tools to perform application actions and verify results.
-
-Agent Tools
-
-Expose controlled automation capabilities to the AI Agent while reusing the existing Service Layer.
-
-Services
-
+The framework follows a layered architecture designed to improve readability, maintainability and scalability.
 Coordinate complete business workflows while keeping tests concise and readable.
 
-Page Objects
+### Page Objects
 
+UI interactions are encapsulated inside dedicated Page Objects, keeping tests focused on business scenarios rather than implementation details.
 Encapsulate page interactions and isolate UI changes from the test layer.
 
-API Layer
+### Services
 
+### API Layer
+
+Business operations are grouped into reusable services to reduce duplication and simplify test implementation.
 Centralizes API requests and response validation.
 
-Factories
+### Fixtures
 
+### Factories
+
+Custom Playwright fixtures centralize common setup logic and dependency injection.
 Generate dynamic test data using Faker.
 
-Utilities
+### Factory Pattern
 
-Provide reusable helpers such as waits, logging and shared methods.
+### Utilities
 
-Project Structure
+Test data is generated dynamically using Faker, avoiding hardcoded values and improving test independence.
+
+### Utilities
+
+---
+
+Shared utilities provide centralized waiting strategies, logging and helper methods used across the framework.
+
+# Project Structure
+
+```text
 .
 ├── .github/
 │   └── workflows/
 │       └── playwright.yml
-│
-├── agent/
-│   ├── agent.ts
-│   ├── runtime/
-│   │   └── qaRuntime.ts
-│   └── tools/
-│       └── employeeTools.ts
 │
 ├── docs/
 │   └── images/
@@ -245,140 +340,244 @@ Project Structure
 ├── README.md
 ├── package.json
 └── playwright.config.ts
-Implemented Features
-UI Automation
-Login
-Create Employee
-Search Employee
-Update Employee
-Delete Employee
-API Automation
-GET
-POST
-PUT
-DELETE
-Framework Features
-Page Object Model
-Service Layer
-Factory Pattern
-Custom Fixtures
-Wait Utilities
-Logging
-HTML Reporting
-Allure Reporting
-GitHub Actions
-AI Agent Features
-AI Agent runtime
-Browser initialization
-Automated login
-Employee search tool
-Employee creation tool
-Tool orchestration
-Independent result verification
-PASS / NOT_FOUND / ERROR results
-Reuse of existing Playwright automation services
-Getting Started
+```
+
+---
+
+## Test Coverage
+
+# Implemented Features
+
+### UI Tests
+
+## UI Automation
+
+- Login
+- Create Employee
+- Search Employee
+- Update Employee
+- Delete Employee
+
+### API Tests
+
+## API Automation
+
+- GET User
+- POST User
+- PUT User
+- DELETE User
+- GET
+- POST
+- PUT
+- DELETE
+
+## Framework Features
+
+- Page Object Model
+- Service Layer
+- Factory Pattern
+- Custom Fixtures
+- Wait Utilities
+- Logging
+- HTML Reporting
+- Allure Reporting
+- GitHub Actions
+
+## AI Agent Features
+
+- AI Agent runtime
+- Browser initialization
+- Automated login
+- Employee search tool
+- Employee creation tool
+- Tool orchestration
+- Employee creation verification
+- Employee search verification
+- PASS / NOT_FOUND / ERROR results
+- Reuse of existing Playwright automation services
+
+---
+
+## Installation
+
+# Getting Started
+
 Clone the repository
+
+## Clone the repository
+
+```bash
 git clone https://github.com/Sfm29/Employee_Management_Automation.git
+```
+
 Install dependencies
+
+## Install dependencies
+
+```bash
 npm install
+```
+
 Install Playwright browsers
+
+## Install Playwright browsers
+
+```bash
 npx playwright install
-Environment Variables
+```
 
-Create a .env file in the project root.
+---
 
+## Environment Variables
+
+# Environment Variables
+
+Create a `.env` file in the project root.
+
+```env
 BASE_URL=https://opensource-demo.orangehrmlive.com
 ORANGE_USERNAME=
 ORANGE_PASSWORD=
 OPENAI_API_KEY=
+```
 
-Do not commit .env or API keys to source control.
+---
 
-Running Tests
+## Running Tests
+
+# Running Tests
 
 Run all tests
 
-npm test
+@@ -168,90 +236,73 @@ Run API tests
+npm run test\:api
 
-Run UI tests
 
-npm run test:ui
-
-Run API tests
-
-npm run test:api
-
+Run Smoke tests
 Run smoke tests
 
 npm run test:smoke
 
+Run Regression tests
 Run regression tests
 
 npm run test:regression
 Running the AI Agent
 
-The AI QA Agent can be started with:
+Start the AI-powered QA Agent with:
 
 npm run agent
 
 The Agent initializes the browser, authenticates against the application and exposes QA automation tools.
 
-Example objective:
+The current Agent supports employee search and employee creation workflows.
 
-Create an employee and verify that the employee was created successfully.
+Example:
 
-The Agent can orchestrate the available tools and return a QA verdict.
-
-Example workflow:
-
-Create Employee
+Create employee
        │
        ▼
-Verify Employee
+Employee created
        │
        ▼
-QA Verdict
+Search employee
+       │
+       ▼
+Employee verified
+       │
+       ▼
+PASS
 
-The Agent reuses the existing Playwright framework rather than implementing a separate browser automation layer.
+The AI Agent reuses the existing Playwright automation framework, Services and Page Objects.
 
 Reports
+Reports
 
+Generate Allure report
 Generate the Allure report
 
 npm run allure:generate
 
+Open Allure report
 Open the Allure report
 
 npm run allure:open
 
+Generate and open report
 Generate and open automatically
 
 npm run allure
 
+Playwright HTML Report
 Generate the Playwright HTML report
 
 npm run report
 Continuous Integration
 
+The project uses GitHub Actions to automatically execute the test suite whenever changes are pushed to the repository.
+
+The workflow performs the following tasks:
+
+## Continuous Integration
+
+The project uses GitHub Actions to automatically execute the test suite whenever changes are pushed to the repository.
+
+The workflow performs the following tasks:
+# Continuous Integration
+
+- Installs project dependencies
+- Installs Playwright browsers
+- Executes UI and API tests
+- Generates Allure reports
+- Publishes test artifacts
 The project uses GitHub Actions to automatically validate every push to the repository.
 
+## Design Principles
 The pipeline performs the following steps:
 
+Separation of concerns
+Reusable components
+Low coupling
+High maintainability
+Readable test scenarios
+Scalable architecture
 Install project dependencies
 Install Playwright browsers
 Execute UI tests
 Execute API tests
 Generate Allure reports
 Upload build artifacts
+Future Improvements
+
+## Possible future enhancements include:
+
+Cross-browser execution matrix
+Parallel execution optimization
+Docker support
+Performance testing
+Visual regression testing
+API contract validation
+Additional AI QA Agent tools
+AI-generated test scenarios
+AI-assisted test planning
+AI-assisted test case generation
+AI-driven test prioritization
+Automated bug report generation
 License
 
 This project is licensed under the MIT License.
 
-See the LICENSE file for details.
+See the [LICENSE](LICENSE) file for details.
 
-Author
+## Author
 
 Steve Ferreira
+# Author
 
+GitHub
+**Steve Ferreira**
+
+https://github.com/Sfm29
 GitHub: https://github.com/Sfm29
+
+
