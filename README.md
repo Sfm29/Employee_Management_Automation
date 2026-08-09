@@ -1,4 +1,9 @@
 # Employee Management Automation
+[![CI](https://github.com/Sfm29/Employee_Management_Automation/actions/workflows/playwright.yml/badge.svg)](https://github.com/Sfm29/Employee_Management_Automation/actions/workflows/playwright.yml)
+![Playwright](https://img.shields.io/badge/Playwright-Latest-2EAD33?logo=playwright&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.x-3178C6?logo=typescript&logoColor=white)
+![Node.js](https://img.shields.io/badge/Node.js-22.x-339933?logo=node.js&logoColor=white)
+![License](https://img.shields.io/badge/License-MIT-blue)
 
 A scalable UI and API automation framework built with **Playwright** and **TypeScript**, enhanced with an **AI-powered QA Agent**.
 
@@ -61,16 +66,16 @@ The framework has also been enhanced with an AI-powered QA Agent that can use ex
 
 The project includes an AI-powered QA Agent built on top of the existing Playwright and TypeScript automation framework.
 
-The Agent receives a high-level QA objective and can use automation capabilities exposed as tools to interact with the application.
+The Agent receives a high-level QA objective and can use automation capabilities exposed as tools to interact with the application and verify results.
 
-The AI layer does not replace the existing automation framework. Instead, it works as an orchestration layer on top of the existing Services and Page Objects.
+The AI Agent does not replace the existing automation framework. Instead, it acts as an orchestration layer on top of the existing Services and Page Objects.
 
-### Current Agent Tools
+## Current Agent Tools
 
 - `search_employee`
 - `create_employee`
 
-### Example
+## Example
 
 The Agent can receive an objective such as:
 
@@ -114,7 +119,7 @@ and then verified as existing.
 
 This demonstrates AI-driven tool orchestration combined with deterministic Playwright automation.
 
-The Agent can also distinguish between different automation outcomes:
+The Agent can currently distinguish between:
 
 PASS
 NOT_FOUND
@@ -274,8 +279,6 @@ Environment Variables
 
 Create a .env file in the project root.
 
-Use the following structure:
-
 BASE_URL=https://opensource-demo.orangehrmlive.com
 ORANGE_USERNAME=
 ORANGE_PASSWORD=
@@ -318,6 +321,15 @@ Create an employee and verify that the employee was created successfully.
 
 The Agent can orchestrate the available tools and return a QA verdict.
 
+Example workflow:
+
+Create Employee
+       │
+       ▼
+Verify Employee
+       │
+       ▼
+QA Verdict
 Reports
 
 Generate the Allure report
