@@ -5,6 +5,7 @@
 ![Node.js](https://img.shields.io/badge/Node.js-22.x-339933?logo=node.js&logoColor=white)
 ![License](https://img.shields.io/badge/License-MIT-blue)
 
+
 A scalable UI and API automation framework built with **Playwright** and **TypeScript**, enhanced with an **AI-powered QA Agent**.
 
 The project demonstrates modern automation architecture by combining UI and API testing with reusable components, Page Object Model, Service Layer, centralized utilities, Continuous Integration using GitHub Actions and AI-driven test orchestration.
@@ -38,7 +39,7 @@ Instead of concentrating business logic inside test files, the framework separat
 
 The project includes both UI and API automation and follows software engineering practices commonly used in enterprise automation projects.
 
-The framework has also been enhanced with an AI-powered QA Agent that can use existing automation capabilities as tools to execute and verify application workflows.
+The framework has also been extended with an AI-powered QA Agent that can use existing automation capabilities as tools to execute and verify application workflows.
 
 ---
 
@@ -81,7 +82,7 @@ The Agent can receive an objective such as:
 
 > Create an employee and verify that the employee was created successfully.
 
-The Agent can then orchestrate multiple automation tools:
+The Agent can then orchestrate the following workflow:
 
 ```text
 AI QA Agent
@@ -101,29 +102,37 @@ Employee verified
      ▼
 PASS
 
-Example result:
+Example execution:
 
 Tool: creating employee John Agent (999998)
 
 Tool result:
-CREATED
+{
+  status: 'CREATED',
+  employee: {
+    firstName: 'John',
+    lastName: 'Agent',
+    employeeId: '999998'
+  }
+}
 
 Tool: searching for employee 999998
 
 Tool result:
-PASS
+{
+  status: 'PASS',
+  employeeId: '999998',
+  message: 'Employee 999998 was found.'
+}
 
 Agent result:
 PASS — Employee John Agent (ID 999998) was created successfully
 and then verified as existing.
 
+The Agent can also identify when an employee cannot be found or when the underlying automation encounters an execution error.
+
 This demonstrates AI-driven tool orchestration combined with deterministic Playwright automation.
 
-The Agent can currently distinguish between:
-
-PASS
-NOT_FOUND
-ERROR
 Technology Stack
 Technology	Purpose
 TypeScript	Programming Language
@@ -175,7 +184,7 @@ Business scenarios only.
 
 AI Agent
 
-Interprets high-level QA objectives and selects available automation tools to perform application actions and verify results.
+Interprets high-level QA objectives and uses the available automation tools to perform application actions and verify results.
 
 Agent Tools
 
@@ -330,6 +339,9 @@ Verify Employee
        │
        ▼
 QA Verdict
+
+The Agent reuses the existing Playwright framework rather than implementing a separate browser automation layer.
+
 Reports
 
 Generate the Allure report
